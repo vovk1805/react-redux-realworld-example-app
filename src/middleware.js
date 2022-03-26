@@ -31,7 +31,7 @@ const promiseMiddleware = (store) => (next) => (action) => {
           store.dispatch({ type: ASYNC_END, promise: action.payload });
         }
         store.dispatch(action);
-      }
+      },
     );
 
     return;

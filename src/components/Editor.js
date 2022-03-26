@@ -8,11 +8,11 @@ import {
   REMOVE_TAG,
   ARTICLE_SUBMITTED,
   EDITOR_PAGE_UNLOADED,
-  UPDATE_FIELD_EDITOR
+  UPDATE_FIELD_EDITOR,
 } from '../constants/actionTypes';
 
 const mapStateToProps = (state) => ({
-  ...state.editor
+  ...state.editor,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => ({
   onRemoveTag: (tag) => dispatch({ type: REMOVE_TAG, tag }),
   onSubmit: (payload) => dispatch({ type: ARTICLE_SUBMITTED, payload }),
   onUnload: (payload) => dispatch({ type: EDITOR_PAGE_UNLOADED }),
-  onUpdateField: (key, value) => dispatch({ type: UPDATE_FIELD_EDITOR, key, value })
+  onUpdateField: (key, value) => dispatch({ type: UPDATE_FIELD_EDITOR, key, value }),
 });
 
 class Editor extends React.PureComponent {
@@ -51,13 +51,11 @@ class Editor extends React.PureComponent {
         title: this.props.title,
         description: this.props.description,
         body: this.props.body,
-        tagList: this.props.tagList
+        tagList: this.props.tagList,
       };
 
       const slug = { slug: this.props.articleSlug };
-      const promise = this.props.articleSlug
-        ? agent.Articles.update(Object.assign(article, slug))
-        : agent.Articles.create(article);
+      const promise = this.props.articleSlug ? agent.Articles.update(Object.assign(article, slug)) : agent.Articles.create(article);
 
       this.props.onSubmit(promise);
     };

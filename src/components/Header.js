@@ -53,10 +53,7 @@ const LoggedInView = React.memo((props) => {
         <li className="nav-item">
           <Link to={`/@${props.currentUser.username}`} className="nav-link">
             <img
-              src={
-                props.currentUser.image ||
-                'https://static.productionready.io/images/smiley-cyrus.jpg'
-              }
+              src={props.currentUser.image || 'https://static.productionready.io/images/smiley-cyrus.jpg'}
               className="user-pic"
               alt={props.currentUser.username}
             />

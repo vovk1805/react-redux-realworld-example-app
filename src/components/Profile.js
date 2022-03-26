@@ -3,12 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import agent from '../agent';
 import { connect } from 'react-redux';
-import {
-  FOLLOW_USER,
-  UNFOLLOW_USER,
-  PROFILE_PAGE_LOADED,
-  PROFILE_PAGE_UNLOADED
-} from '../constants/actionTypes';
+import { FOLLOW_USER, UNFOLLOW_USER, PROFILE_PAGE_LOADED, PROFILE_PAGE_UNLOADED } from '../constants/actionTypes';
 
 const EditProfileSettings = React.memo((props) => {
   if (props.isUser) {
@@ -54,31 +49,28 @@ const FollowUserButton = React.memo((props) => {
 const mapStateToProps = (state) => ({
   ...state.articleList,
   currentUser: state.common.currentUser,
-  profile: state.profile
+  profile: state.profile,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onFollow: (username) =>
     dispatch({
       type: FOLLOW_USER,
-      payload: agent.Profile.follow(username)
+      payload: agent.Profile.follow(username),
     }),
   onLoad: (payload) => dispatch({ type: PROFILE_PAGE_LOADED, payload }),
   onUnfollow: (username) =>
     dispatch({
       type: UNFOLLOW_USER,
-      payload: agent.Profile.unfollow(username)
+      payload: agent.Profile.unfollow(username),
     }),
-  onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED })
+  onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED }),
 });
 
 class Profile extends React.PureComponent {
   componentDidMount() {
     this.props.onLoad(
-      Promise.all([
-        agent.Profile.get(this.props.match.params.username),
-        agent.Articles.byAuthor(this.props.match.params.username)
-      ])
+      Promise.all([agent.Profile.get(this.props.match.params.username), agent.Articles.byAuthor(this.props.match.params.username)]),
     );
   }
 
@@ -110,8 +102,7 @@ class Profile extends React.PureComponent {
       return null;
     }
 
-    const isUser =
-      this.props.currentUser && this.props.profile.username === this.props.currentUser.username;
+    const isUser = this.props.currentUser && this.props.profile.username === this.props.currentUser.username;
 
     return (
       <div className="profile-page">
@@ -128,12 +119,7 @@ class Profile extends React.PureComponent {
                 <p>{profile.bio}</p>
 
                 <EditProfileSettings isUser={isUser} />
-                <FollowUserButton
-                  isUser={isUser}
-                  user={profile}
-                  follow={this.props.onFollow}
-                  unfollow={this.props.onUnfollow}
-                />
+                <FollowUserButton isUser={isUser} user={profile} follow={this.props.onFollow} unfollow={this.props.onUnfollow} />
               </div>
             </div>
           </div>
