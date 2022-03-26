@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { SET_PAGE } from '../constants/actionTypes';
 
 const mapDispatchToProps = (dispatch) => ({
-  onSetPage: (page, payload) => dispatch({ type: SET_PAGE, page, payload })
+  onSetPage: (page, payload) => dispatch({ type: SET_PAGE, page, payload }),
 });
 
 const ListPagination = React.memo((props) => {
@@ -35,11 +35,7 @@ const ListPagination = React.memo((props) => {
             setPage(v);
           };
           return (
-            <li
-              className={isCurrent ? 'page-item active' : 'page-item'}
-              onClick={onClick}
-              key={v.toString()}
-            >
+            <li className={isCurrent ? 'page-item active' : 'page-item'} onClick={onClick} key={v.toString()}>
               <button type="button" className="page-link">
                 {v + 1}
               </button>

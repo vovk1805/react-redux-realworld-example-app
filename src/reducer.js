@@ -19,5 +19,5 @@ export default (history) =>
     home,
     profile,
     settings,
-    router: connectRouter(history)
+    router: connectRouter(history),
   });

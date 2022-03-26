@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  eslint:
+  format:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,7 +18,7 @@ jobs:
       - name: Check format
         run: npm run check:format
 
-  prettier:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

@@ -9,14 +9,11 @@ class SettingsForm extends React.PureComponent {
     super(props);
     const { currentUser } = props;
     this.state = {
-      image:
-        (currentUser && currentUser.image) ||
-        'https://static.productionready.io/images/smiley-cyrus.jpg' ||
-        '',
+      image: (currentUser && currentUser.image) || 'https://static.productionready.io/images/smiley-cyrus.jpg' || '',
       username: (currentUser && currentUser.username) || '',
       bio: (currentUser && currentUser.bio) || '',
       email: (currentUser && currentUser.email) || '',
-      password: (currentUser && currentUser.password) || ''
+      password: (currentUser && currentUser.password) || '',
     };
 
     this.updateState = (field) => (ev) => {
@@ -95,11 +92,7 @@ class SettingsForm extends React.PureComponent {
             />
           </fieldset>
 
-          <button
-            className="btn btn-lg btn-primary pull-xs-right"
-            type="submit"
-            disabled={this.state.inProgress}
-          >
+          <button className="btn btn-lg btn-primary pull-xs-right" type="submit" disabled={this.state.inProgress}>
             Update Settings
           </button>
         </fieldset>
@@ -110,13 +103,13 @@ class SettingsForm extends React.PureComponent {
 
 const mapStateToProps = (state) => ({
   ...state.settings,
-  currentUser: state.common.currentUser
+  currentUser: state.common.currentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onClickLogout: () => dispatch({ type: LOGOUT }),
   onSubmitForm: (user) => dispatch({ type: SETTINGS_SAVED, payload: agent.Auth.save(user) }),
-  onUnload: () => dispatch({ type: SETTINGS_PAGE_UNLOADED })
+  onUnload: () => dispatch({ type: SETTINGS_PAGE_UNLOADED }),
 });
 
 class Settings extends React.PureComponent {
@@ -130,10 +123,7 @@ class Settings extends React.PureComponent {
 
               <ListErrors errors={this.props.errors} />
 
-              <SettingsForm
-                currentUser={this.props.currentUser}
-                onSubmitForm={this.props.onSubmitForm}
-              />
+              <SettingsForm currentUser={this.props.currentUser} onSubmitForm={this.props.onSubmitForm} />
 
               <hr />
 

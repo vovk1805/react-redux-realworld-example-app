@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => ({
     const payload = agent.Auth.register(username, email, password);
     dispatch({ type: REGISTER, payload });
   },
-  onUnload: () => dispatch({ type: REGISTER_PAGE_UNLOADED })
+  onUnload: () => dispatch({ type: REGISTER_PAGE_UNLOADED }),
 });
 
 class Register extends React.PureComponent {
@@ -85,11 +85,7 @@ class Register extends React.PureComponent {
                     />
                   </fieldset>
 
-                  <button
-                    className="btn btn-lg btn-primary pull-xs-right"
-                    type="submit"
-                    disabled={this.props.inProgress}
-                  >
+                  <button className="btn btn-lg btn-primary pull-xs-right" type="submit" disabled={this.props.inProgress}>
                     Sign up
                   </button>
                 </fieldset>
