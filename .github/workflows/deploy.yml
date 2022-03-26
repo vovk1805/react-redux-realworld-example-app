@@ -9,8 +9,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: action/checkout@v2
-      - uses: action/setup-node@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
           node-version: '14'
       - run: npm install
@@ -19,7 +19,7 @@ jobs:
         env:
           REACT_APP_BACKEND_URL: ${{ secrets.API_URL }}
       - name: Archive build
-        uses: action/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
           name: build
           path: build
@@ -33,17 +33,19 @@ jobs:
         with:
           name: build
           path: build
-      - name: Copy build to server
-        uses: appleboy/scp-action@v0.1.1
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          rm: true
-          source: ./build/*
-          target: '~/realworld/public'
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 700 ~/.ssh
+          chmod 600 ~/.ssh/id_rsa
+          echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+      - name: Copy files to the server
+        run: |
+          scp -r ./build/* $SSH_USER@$SSH_HOST:~/realworld/public
+        env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
