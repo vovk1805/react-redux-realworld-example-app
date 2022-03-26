@@ -17,7 +17,11 @@ const ArticleList = React.memo((props) => {
         return <ArticlePreview article={article} key={article.slug} />;
       })}
 
-      <ListPagination pager={props.pager} articlesCount={props.articlesCount} currentPage={props.currentPage} />
+      <ListPagination
+        pager={props.pager}
+        articlesCount={props.articlesCount}
+        currentPage={props.currentPage}
+      />
     </div>
   );
 });

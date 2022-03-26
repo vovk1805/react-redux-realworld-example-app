@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import { ADD_COMMENT } from '../../constants/actionTypes';
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (payload) => dispatch({ type: ADD_COMMENT, payload }),
+  onSubmit: (payload) => dispatch({ type: ADD_COMMENT, payload })
 });
 
 class CommentInput extends React.PureComponent {
   constructor() {
     super();
     this.state = {
-      body: '',
+      body: ''
     };
 
     this.setBody = (ev) => {
@@ -40,7 +40,10 @@ class CommentInput extends React.PureComponent {
         </div>
         <div className="card-footer">
           <img
-            src={this.props.currentUser.image || 'https://static.productionready.io/images/smiley-cyrus.jpg'}
+            src={
+              this.props.currentUser.image ||
+              'https://static.productionready.io/images/smiley-cyrus.jpg'
+            }
             className="comment-author-img"
             alt={this.props.currentUser.username}
           />

@@ -17,7 +17,12 @@ const getMiddleware = () => {
     return applyMiddleware(myRouterMiddleware, promiseMiddleware, localStorageMiddleware);
   } else {
     // Enable additional logging in non-production environments.
-    return applyMiddleware(myRouterMiddleware, promiseMiddleware, localStorageMiddleware, createLogger());
+    return applyMiddleware(
+      myRouterMiddleware,
+      promiseMiddleware,
+      localStorageMiddleware,
+      createLogger()
+    );
   }
 };
 

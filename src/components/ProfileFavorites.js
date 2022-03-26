@@ -7,14 +7,17 @@ import { PROFILE_PAGE_LOADED, PROFILE_PAGE_UNLOADED } from '../constants/actionT
 
 const mapDispatchToProps = (dispatch) => ({
   onLoad: (pager, payload) => dispatch({ type: PROFILE_PAGE_LOADED, pager, payload }),
-  onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED }),
+  onUnload: () => dispatch({ type: PROFILE_PAGE_UNLOADED })
 });
 
 class ProfileFavorites extends Profile {
   componentDidMount() {
     this.props.onLoad(
       (page) => agent.Articles.favoritedBy(this.props.match.params.username, page),
-      Promise.all([agent.Profile.get(this.props.match.params.username), agent.Articles.favoritedBy(this.props.match.params.username)]),
+      Promise.all([
+        agent.Profile.get(this.props.match.params.username),
+        agent.Articles.favoritedBy(this.props.match.params.username)
+      ])
     );
   }
 

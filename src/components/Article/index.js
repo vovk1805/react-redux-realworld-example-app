@@ -8,17 +8,22 @@ import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../constants/acti
 
 const mapStateToProps = (state) => ({
   ...state.article,
-  currentUser: state.common.currentUser,
+  currentUser: state.common.currentUser
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onLoad: (payload) => dispatch({ type: ARTICLE_PAGE_LOADED, payload }),
-  onUnload: () => dispatch({ type: ARTICLE_PAGE_UNLOADED }),
+  onUnload: () => dispatch({ type: ARTICLE_PAGE_UNLOADED })
 });
 
 class Article extends React.PureComponent {
   componentDidMount() {
-    this.props.onLoad(Promise.all([agent.Articles.get(this.props.match.params.id), agent.Comments.forArticle(this.props.match.params.id)]));
+    this.props.onLoad(
+      Promise.all([
+        agent.Articles.get(this.props.match.params.id),
+        agent.Comments.forArticle(this.props.match.params.id)
+      ])
+    );
   }
 
   componentWillUnmount() {
@@ -31,7 +36,9 @@ class Article extends React.PureComponent {
     }
 
     const markup = { __html: marked(this.props.article.body, { sanitize: true }) };
-    const canModify = this.props.currentUser && this.props.currentUser.username === this.props.article.author.username;
+    const canModify =
+      this.props.currentUser &&
+      this.props.currentUser.username === this.props.article.author.username;
     return (
       <div className="article-page">
         <div className="banner">

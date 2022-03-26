@@ -8,28 +8,42 @@ import { store } from '../store';
 import { push } from 'connected-react-router';
 // const Home = lazy(() => import('../components/Home'/* webpackChunkName: "Home", webpackPreload: true  */))
 import Home from '../components/Home';
-const Article = lazy(() => import('../components/Article' /* webpackChunkName: "Article", webpackPrefetch: true  */));
-const Editor = lazy(() => import('../components/Editor' /* webpackChunkName: "Editor", webpackPrefetch: true  */));
-const Login = lazy(() => import('../components/Login' /* webpackChunkName: "Login", webpackPrefetch: true  */));
-const Profile = lazy(() => import('../components/Profile' /* webpackChunkName: "Profile", webpackPrefetch: true  */));
-const ProfileFavorites = lazy(() =>
-  import('../components/ProfileFavorites' /* webpackChunkName: "ProfileFavorites", webpackPrefetch: true  */),
+const Article = lazy(() =>
+  import('../components/Article' /* webpackChunkName: "Article", webpackPrefetch: true  */)
 );
-const Register = lazy(() => import('../components/Register' /* webpackChunkName: "Register", webpackPrefetch: true  */));
-const Settings = lazy(() => import('../components/Settings' /* webpackChunkName: "Settings", webpackPrefetch: true  */));
+const Editor = lazy(() =>
+  import('../components/Editor' /* webpackChunkName: "Editor", webpackPrefetch: true  */)
+);
+const Login = lazy(() =>
+  import('../components/Login' /* webpackChunkName: "Login", webpackPrefetch: true  */)
+);
+const Profile = lazy(() =>
+  import('../components/Profile' /* webpackChunkName: "Profile", webpackPrefetch: true  */)
+);
+const ProfileFavorites = lazy(() =>
+  import(
+    '../components/ProfileFavorites' /* webpackChunkName: "ProfileFavorites", webpackPrefetch: true  */
+  )
+);
+const Register = lazy(() =>
+  import('../components/Register' /* webpackChunkName: "Register", webpackPrefetch: true  */)
+);
+const Settings = lazy(() =>
+  import('../components/Settings' /* webpackChunkName: "Settings", webpackPrefetch: true  */)
+);
 
 const mapStateToProps = (state) => {
   return {
     appLoaded: state.common.appLoaded,
     appName: state.common.appName,
     currentUser: state.common.currentUser,
-    redirectTo: state.common.redirectTo,
+    redirectTo: state.common.redirectTo
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onLoad: (payload, token) => dispatch({ type: APP_LOAD, payload, token, skipTracking: true }),
-  onRedirect: () => dispatch({ type: REDIRECT }),
+  onRedirect: () => dispatch({ type: REDIRECT })
 });
 
 class App extends React.PureComponent {

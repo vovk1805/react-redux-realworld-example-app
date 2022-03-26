@@ -11,13 +11,13 @@ const mapDispatchToProps = (dispatch) => ({
   favorite: (slug) =>
     dispatch({
       type: ARTICLE_FAVORITED,
-      payload: agent.Articles.favorite(slug),
+      payload: agent.Articles.favorite(slug)
     }),
   unfavorite: (slug) =>
     dispatch({
       type: ARTICLE_UNFAVORITED,
-      payload: agent.Articles.unfavorite(slug),
-    }),
+      payload: agent.Articles.unfavorite(slug)
+    })
 });
 
 const ArticlePreview = React.memo((props) => {
@@ -37,7 +37,12 @@ const ArticlePreview = React.memo((props) => {
     <div className="article-preview">
       <div className="article-meta">
         <Link to={`/@${article.author.username}`}>
-          <img src={article.author.image || 'https://static.productionready.io/images/smiley-cyrus.jpg'} alt={article.author.username} />
+          <img
+            src={
+              article.author.image || 'https://static.productionready.io/images/smiley-cyrus.jpg'
+            }
+            alt={article.author.username}
+          />
         </Link>
 
         <div className="info">

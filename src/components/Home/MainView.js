@@ -13,7 +13,11 @@ const YourFeedTab = React.memo((props) => {
 
     return (
       <li className="nav-item">
-        <button type="button" className={props.tab === 'feed' ? 'nav-link active' : 'nav-link'} onClick={clickHandler}>
+        <button
+          type="button"
+          className={props.tab === 'feed' ? 'nav-link active' : 'nav-link'}
+          onClick={clickHandler}
+        >
           Your Feed
         </button>
       </li>
@@ -29,7 +33,11 @@ const GlobalFeedTab = React.memo((props) => {
   };
   return (
     <li className="nav-item">
-      <button type="button" className={props.tab === 'all' ? 'nav-link active' : 'nav-link'} onClick={clickHandler}>
+      <button
+        type="button"
+        className={props.tab === 'all' ? 'nav-link active' : 'nav-link'}
+        onClick={clickHandler}
+      >
         Global Feed from Testing
       </button>
     </li>
@@ -53,11 +61,11 @@ const TagFilterTab = React.memo((props) => {
 const mapStateToProps = (state) => ({
   ...state.articleList,
   tags: state.home.tags,
-  token: state.common.token,
+  token: state.common.token
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onTabClick: (tab, pager, payload) => dispatch({ type: CHANGE_TAB, tab, pager, payload }),
+  onTabClick: (tab, pager, payload) => dispatch({ type: CHANGE_TAB, tab, pager, payload })
 });
 
 const MainView = React.memo((props) => {
