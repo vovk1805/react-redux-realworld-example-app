@@ -9,14 +9,15 @@ import profile from './reducers/profile';
 import settings from './reducers/settings';
 import { connectRouter } from 'connected-react-router';
 
-export default (history) => combineReducers({
-  article,
-  articleList,
-  auth,
-  common,
-  editor,
-  home,
-  profile,
-  settings,
-  router: connectRouter(history)
-});
+export default (history) =>
+  combineReducers({
+    article,
+    articleList,
+    auth,
+    common,
+    editor,
+    home,
+    profile,
+    settings,
+    router: connectRouter(history)
+  });

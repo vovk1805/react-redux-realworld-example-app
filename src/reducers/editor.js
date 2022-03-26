@@ -42,7 +42,7 @@ export default (state = {}, action) => {
     case REMOVE_TAG:
       return {
         ...state,
-        tagList: state.tagList.filter(tag => tag !== action.tag)
+        tagList: state.tagList.filter((tag) => tag !== action.tag)
       };
     case UPDATE_FIELD_EDITOR:
       return { ...state, [action.key]: action.value };
