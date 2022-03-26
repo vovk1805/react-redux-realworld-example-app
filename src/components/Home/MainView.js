@@ -30,7 +30,7 @@ const GlobalFeedTab = React.memo((props) => {
   return (
     <li className="nav-item">
       <button type="button" className={props.tab === 'all' ? 'nav-link active' : 'nav-link'} onClick={clickHandler}>
-        Global Feed from Testing
+        Global Feed from Testing (One more change)
       </button>
     </li>
   );
