@@ -51,7 +51,7 @@ jobs:
       - name: Copy build to server
         run: |
           ssh $SSH_USER@$SSH_HOST "mkdir -p ~/app/${{ github.head_ref }}/public"
-          rsync -ravz ./build* $SSH_USER@$SSH_HOST:~/app/${{ github.head_ref }}/public/
+          rsync -ravz ./build/* $SSH_USER@$SSH_HOST:~/app/${{ github.head_ref }}/public/
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
