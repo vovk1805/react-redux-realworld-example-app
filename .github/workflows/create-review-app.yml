@@ -2,9 +2,9 @@
 # NAME_OF_BRUNCH-139.177.176.70.nip.io
 # testing-139.177.176.70.nip.io
 # http://testing-139.177.176.70.nip.io/api
-# app / main
-# app / testing
-# app / testing-2
+# app/main
+# app/testing
+# app/testing-2
 name: Create review app
 
 on:
@@ -55,3 +55,11 @@ jobs:
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
+      - name: Post review app URL
+        if: success()
+        uses: mshick/add-pr-comment@v1
+        with:
+          message: Created new review app at ${{ env.REVIEW_APP_URL }}
+          repo_token: ${{ github.GITHUB_TOKEN }}
+        env:
+          REVIEW_APP_URL: http://${{ github.head_ref }}-${{ secrets.APP_HOST }}/
