@@ -12,6 +12,7 @@ on:
 
 jobs:
   build:
+    if: "!contains(github.event.pull_request.title, 'SKIP REVIEW')"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -30,7 +31,6 @@ jobs:
           path: build
 
   deploy:
-    if: "!contains(github.event.pull_request.title, 'SKIP REVIEW')"
     needs: build
     runs-on: ubuntu-latest
     steps:
