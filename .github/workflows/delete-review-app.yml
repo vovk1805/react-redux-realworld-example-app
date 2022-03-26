@@ -6,7 +6,6 @@ on:
 
 jobs:
   delete:
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Setup SSH key
