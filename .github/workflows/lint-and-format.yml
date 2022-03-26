@@ -16,7 +16,7 @@ jobs:
           node-version: '14'
       - run: npm install
       - name: Check format
-        run: npm check:format
+        run: npm run check:format
 
   prettier:
     runs-on: ubuntu-latest
