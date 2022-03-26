@@ -12,10 +12,10 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
     steps:
-      - uses: action/checkout@v2
-      - uses: action/setup-node@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
           node-version: '14'
       - run: npm install
@@ -24,14 +24,14 @@ jobs:
         env:
           REACT_APP_BACKEND_URL: http://${{ github.head_ref }}-${{ secrets.REACT_APP_BACKEND_URL }}
       - name: Archive build
-        uses: action/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
           name: build
           path: build
 
   deploy:
     needs: build
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
     steps:
       - name: Download a single artifact
         uses: actions/download-artifact@v2
