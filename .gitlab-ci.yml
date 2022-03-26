@@ -40,4 +40,4 @@ deploy:
       --exclude ./.gitignore
       --exclude ./.npm
       --exclude ./.git
-      ./build/* deploy@139.177.176.70:~/realworld/
+      ./build/* deploy@139.177.176.70:~/realworld/public/
