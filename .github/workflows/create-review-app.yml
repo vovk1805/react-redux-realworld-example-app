@@ -1,0 +1,57 @@
+---
+# NAME_OF_BRUNCH-139.177.176.70.nip.io
+# testing-139.177.176.70.nip.io
+# http://testing-139.177.176.70.nip.io/api
+# app / main
+# app / testing
+# app / testing-2
+name: Create review app
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu:latest
+    steps:
+      - uses: action/checkout@v2
+      - uses: action/setup-node@v2
+        with:
+          node-version: '14'
+      - run: npm install
+      - name: Build
+        run: npm run build
+        env:
+          REACT_APP_BACKEND_URL: http://${{ github.head_ref }}-${{ secrets.API_URL }}
+      - name: Archive build
+        uses: action/upload-artifact@v2
+        with:
+          name: build
+          path: build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu:latest
+    steps:
+      - name: Download a single artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: build
+      - name: Setup SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+      - name: Adding known hosts
+        run: ssh-keyscan -H ${{ secrets.SSH_KNOW_HOSTS }} >> ~/.ssh/known_hosts
+      - name: Copy build to server
+        run: |
+          ssh $SSH_USER@$SSH_HOST "mkdir -p ~/app/${{ github.head_ref }}/public"
+          rsync -ravz ./build* $SSH_USER@$SSH_HOST:~/app/${{ github.head_ref }}/public/
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
